@@ -15,23 +15,24 @@ function onReceiverList(list) {
 }
 
 function doLaunch(receiver) {
-    var request = new cast.LaunchRequest("YOUR APP ID HERE", receiver);
+    var request = new cast.LaunchRequest(APP_CONFIG.CHROMECAST_APP_ID, receiver);
     cast_api.launch(request, onLaunch);
 };
 
 function onLaunch(activity) {
     if (activity.status == "running") {
-        console.log("running");
+        console.log("Cast running");
         cast_activity = activity;
     } else if (activity.status == "error") {
         cast_activity = null;
-        console.log("error");
+        console.log("Cast error");
     }
 };
 
 function keyup(event) {
     var keycode = (event.keycode ? event.keyCode : event.which);  
-    cast_api.sendMessage(cast_activity.activityId, "Test", { "type": "keyup", "keycode":keycode })
+    console.log('Sending:', keycode);
+    cast_api.sendMessage(cast_activity.activityId, "Test", { "type": "keyup", "keycode": keycode });
 }
 
 $(function() {
@@ -42,8 +43,7 @@ $(function() {
             event.data.event == "Hello")
             
             initializeApi();
-
-            $(document).on('keyup', keyup);
     });
 
+    $(document).on('keyup', keyup);
 });

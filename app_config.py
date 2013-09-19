@@ -73,6 +73,7 @@ S3_BASE_URL = ''
 SERVERS = []
 SERVER_BASE_URL = ''
 DEBUG = True
+CHROMECAST_APP_ID = ''
 
 """
 COPY EDITING
@@ -114,6 +115,15 @@ NPR_DFP = {
     'TESTSERVER': 'true'
 }
 
+# http://apps.npr.org/chromecast-test/receiver.html
+PRODUCTION_CHROMECAST_APP_ID = '62365b68-5e64-4b18-be92-f0016a5b8fa5_1'
+
+# http://stage-apps.npr.org/chromecast-test/receiver.html 
+STAGING_CHROMECAST_APP_ID = '62365b68-5e64-4b18-be92-f0016a5b8fa5'
+
+# http://10.0.1.5:8000/receiver.html
+DEVELOPMENT_CHROMECAST_APP_ID = '15d49e72-5934-44a1-bdc7-7ed3dc9b77bf'
+
 """
 SERVICES
 """
@@ -149,6 +159,7 @@ def configure_targets(deployment_target):
     global SERVER_BASE_URL
     global DEBUG
     global DEPLOYMENT_TARGET
+    global CHROMECAST_APP_ID
 
     if deployment_target == 'production':
         S3_BUCKETS = PRODUCTION_S3_BUCKETS
@@ -156,18 +167,21 @@ def configure_targets(deployment_target):
         SERVERS = PRODUCTION_SERVERS
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
         DEBUG = False
+        CHROMECAST_APP_ID = PRODUCTION_CHROMECAST_APP_ID
     elif deployment_target == 'staging':
         S3_BUCKETS = STAGING_S3_BUCKETS
         S3_BASE_URL = 'http://%s/%s' % (S3_BUCKETS[0], PROJECT_SLUG)
         SERVERS = STAGING_SERVERS
         SERVER_BASE_URL = 'http://%s/%s' % (SERVERS[0], PROJECT_SLUG)
         DEBUG = True
+        CHROMECAST_APP_ID = STAGING_CHROMECAST_APP_ID
     else:
         S3_BUCKETS = [] 
         S3_BASE_URL = 'http://127.0.0.1:8000'
         SERVERS = []
         SERVER_BASE_URL = 'http://127.0.0.1:8001/%s' % PROJECT_SLUG
         DEBUG = True
+        CHROMECAST_APP_ID = DEVELOPMENT_CHROMECAST_APP_ID
 
     DEPLOYMENT_TARGET = deployment_target
 

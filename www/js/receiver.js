@@ -1,18 +1,21 @@
 var receiver = new cast.receiver.Receiver(
-    'YOUR APP ID HERE',
+    APP_CONFIG.CHROMECAST_APP_ID,
     ['Test'],
     "",
     5
 );
 
 function onMessage(event) {	
-    var e = jQuery.Event("keypress");		
-    e.which = event.message.keycode;
+    var input = $("#test-input");
+    
+    var char = String.fromCharCode(event.message.keycode);
 
-    $("#test-input").trigger(e);
+    console.log('Received:', char);
+
+    input.val(input.val() + char);
 }
 
-var channel_handler = new cast.receiver.ChannelHandler('Test');
+var channelHandler = new cast.receiver.ChannelHandler('Test');
 
 channelHandler.addChannelFactory(receiver.createChannelFactory('Test'));
 

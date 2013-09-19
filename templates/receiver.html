@@ -18,6 +18,8 @@
 <input id="test-input" placeholder="start typing"></input>
 {% endblock content %}
 
+
 {% block extra_foot_js %}
+{{ JS.push('js/lib/cast_receiver.js') }}
 {{ JS.push('js/receiver.js') }}
 {% endblock extra_foot_js %}
