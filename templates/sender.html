@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+
+{% block header_content %}
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>SENDER</h1>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+
+{% block content %}
+<h1>{{ PROJECT_NAME }}</h1>
+<div id="story-meta">
+    <p class="byline">by <span>{{ COPY.attribution.byline }}</span></p>
+    <p class="dateblock">
+        <span class="date">{{ COPY.attribution.pubdate }}</span>
+        <span class="time"> {{ COPY.attribution.pubtime }}</span>
+    </p>
+</div>
+{% endblock content %}
+
+{% block extra_foot_js %}
+{{ JS.push('js/sender.js') }}
+{% endblock extra_foot_js %}

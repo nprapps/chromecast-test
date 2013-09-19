@@ -5,8 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>{{ COPY.content.header_title }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum }}</h2>
+                <h1>RECEIVER</h1>
             </div>
         </div>
     </div>
@@ -23,24 +22,8 @@
         <span class="time"> {{ COPY.attribution.pubtime }}</span>
     </p>
 </div>
+{% endblock content %}
 
-<h2>Example COPY list</h2>
-<dl>
-    {% for row in COPY.example_list %}
-    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
-    {% endfor %}
-</dl>
-
-<h2>JST example</h2>
-<p id="template-example"></p>
-{% endblock %}
-
-
-{% block wide_content %}
-<div class="row">
-    <div class="col-md-12">
-        <h2>{{ COPY.content.footer_title }}</h2>
-        <p>{{ COPY.content.lorem_ipsum }}</p>
-    </div>
-</div>
-{% endblock %}
+{% block extra_foot_js %}
+{{ JS.push('js/receiver.js') }}
+{% endblock extra_foot_js %}
